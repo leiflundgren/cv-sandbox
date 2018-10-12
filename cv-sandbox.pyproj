@@ -21,7 +21,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="eye-check.py" />
+    <Compile Include="eye_check.py" />
     <Compile Include="tests\phototests.py">
       <SubType>Code</SubType>
     </Compile>
