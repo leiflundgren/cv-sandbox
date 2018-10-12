@@ -1,3 +1,4 @@
+import cv2
 
 casc_file_frontal = "cascades/haarcascade_frontalface_default.xml"
 casc_file_glasses = 'cascades/haarcascade_eye_tree_eyeglasses.xml'
