@@ -24,6 +24,12 @@ casc_file_lefteye = 'cascades/haarcascade_lefteye_2splits.xml'
 class EyeChecker:
     def __init__(self):
         self.load_cascades()
+        self.detect_settings = {
+            'scaleFactor': 1.2, 
+            'minNeighbors': 8, 
+            'minSize': (200, 200), 
+            'flags': cv2.CASCADE_FIND_BIGGEST_OBJECT
+        }
         pass
 
     @staticmethod
@@ -88,14 +94,15 @@ class EyeChecker:
         def detect_faces(self):
             faces_per_casc = {}
             self.faces = []
+            
             for name, casc in self.parent.face_cascades:
-                faces = casc.detectMultiScale(self.gray,
-                    scaleFactor=1.12,
-                    minNeighbors=8,
-                    minSize=(50, 100))
-                trace(6, 'detecting {0}/{1} found {2} faces'.format(self.name, name, len(faces)))
-                faces_per_casc[name] = faces
-                self.faces.extend(faces)
+                faces = casc.detectMultiScale(self.gray, **self.parent.detect_settings)
+                if len(faces) == 0 :
+                    trace(6, 'detecting {0}/{1} found NO faces'.format(self.name, name, len(faces)))
+                else:
+                    trace(6, 'detecting {0}/{1} found {2} faces\n{3}'.format(self.name, name, len(faces), faces))
+                    faces_per_casc[name] = faces
+                    self.faces.extend(faces)
 
         def detect_eyes_in_faces(self):
             for i in range(0, len(self.faces)):                
@@ -144,21 +151,21 @@ class EyeChecker:
             trace(6, 'show faces on ' + self.name)
             img = self.im.copy()
             # Draw a rectangle around the faces
-            #for (x, y, w, h) in self.faces:
-            #    cv2.rectangle(img, (x, y), (x+w, y+h), (40, 255, 0), 3)
+            for (x, y, w, h) in self.faces:
+                cv2.rectangle(img, (x, y), (x+w, y+h), (40, 255, 60), 5)
                 
             ## and eyes
-            #for (x, y, w, h) in self.eyes:
-            #    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 40, 0), 3)
+            for (x, y, w, h) in self.eyes:
+                cv2.rectangle(img, (x, y), (x+w, y+h), (255, 40, 0), 3)
             
             ## and glasses
-            #for (x, y, w, h) in self.glasses:
-            #    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 40, 246), 3)
+            for (x, y, w, h) in self.glasses:
+                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 40, 246), 3)
                  
-            for (x, y, w, h) in self.left_eyes:
-                cv2.rectangle(img, (x, y), (x + w, y + h), (245, 40, 90), 3)
-            for (x, y, w, h) in self.right_eyes:
-                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 40, 246), 3)
+            #for (x, y, w, h) in self.left_eyes:
+            #    cv2.rectangle(img, (x, y), (x + w, y + h), (245, 40, 90), 3)
+            #for (x, y, w, h) in self.right_eyes:
+            #    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 40, 246), 3)
 
             height, width, depth = img.shape
             max_h = 800.0
