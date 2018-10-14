@@ -19,12 +19,12 @@ class phototests(unittest.TestCase):
     def tearDown(self):
         trace(2,'tearDown: phototests done')
 
-    def test_load_spice_girls(self):
-        trace(5, 'testing spice girls image')
-        m = self.eye_checker.check_image('sample_photos/spice-girls.jpg')
-        self.assertIsNotNone(m, 'check_image should return possitive')
-        #m.show_faces()
-        self.assertEqual(4, len(m.faces)) # Sporty spice leans head to side?
+    #def test_load_spice_girls(self):
+    #    trace(5, 'testing spice girls image')
+    #    m = self.eye_checker.check_image('sample_photos/spice-girls.jpg')
+    #    self.assertIsNotNone(m, 'check_image should return possitive')
+    #    #m.show_faces()
+    #    self.assertEqual(4, len(m.faces)) # Sporty spice leans head to side?
 
     def test_load_frontal_glasses(self):
         file = 'sample_photos/frontal.jpg'

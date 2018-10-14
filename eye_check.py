@@ -34,13 +34,54 @@ class EyeChecker:
             )
             trace(6, 'detecting {0} found {1} faces'.format(self.name, len(self.faces)))
 
+            self.eyes = []
+            for i in range(0, len(self.faces)):                
+                face = self.faces[i]
+                (x,y,w,h) = face
+                trace(8, 'detecting {0} face {1} shape {2}'.format(self.name, i, face))
+
+                roi_gray = self.gray[y:y+h, x:x+w]
+                roi_color = self.im[y:y+h, x:x+w]
+
+                eyes = self.parent.glasses_casc.detectMultiScale(
+                    roi_gray,
+                    scaleFactor=1.12,
+                    minNeighbors=5,
+                    minSize=(30, 30)
+                )
+                trace(6, 'eye-detecting in {0}, face {1} found {2} eyes: {3} \n{4} '.format(self.name, i, len(eyes), type(eyes), eyes))
+                if len(eyes) > 0 :
+                    try:
+                        for (ex,ey,ew,eh) in eyes.tolist():
+                            e2 = (ex+x, ey+y, ew, eh)
+                            self.eyes.append(e2)
+                    except:
+                        trace(1, 'Failed to lambda on \n' + str(eyes))
+                        raise
+            trace(7, 'eye detect done\n' + str(self.eyes))
+
         def show_faces(self):
+            trace(6, 'show faces on ' + self.name)
             img = self.im.copy()
             # Draw a rectangle around the faces
             for (x, y, w, h) in self.faces:
-                cv2.rectangle(img, (x, y), (x+w, y+h), (40, 255, 0), 2)
+                cv2.rectangle(img, (x, y), (x+w, y+h), (40, 255, 0), 3)
+                
+            # and eyes
+            for (x, y, w, h) in self.eyes:
+                cv2.rectangle(img, (x, y), (x+w, y+h), (255, 40, 0), 3)
                 
 
+
+            height, width, depth = img.shape
+            max_h = 800.0
+            max_w = 1000.0
+            if height > max_h or width > max_w:
+                scale = max_h / height if height > max_h else max_w/width
+                #nw,nh= int(img.shape[1]*scale), int(img.shape[0]*scale)
+                nw,nh= int(width*scale), int(height*scale)
+                trace(7, 'Scaling image from {0} to {1}'.format((width,height), (nw,nh)))
+                img = cv2.resize(img, (nw,nh))
             cv2.imshow("Faces found", img)
             cv2.waitKey(0)
 
