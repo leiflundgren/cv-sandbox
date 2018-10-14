@@ -32,11 +32,11 @@ class phototests(unittest.TestCase):
     #    m = self.eye_checker.check_image(file)
     #    m.show_faces()
 
-    def test_load_angle_glasses(self):
-        file = 'sample_photos/side_open_eyes.jpg'
-        trace(5, 'testing ' + file)
-        m = self.eye_checker.check_image(file)
-        m.show_faces()
+    #def test_load_angle_glasses(self):
+    #    file = 'sample_photos/side_open_eyes.jpg'
+    #    trace(5, 'testing ' + file)
+    #    m = self.eye_checker.check_image(file)
+    #    m.show_faces()
     def test_load_angle_closed_eyes(self):
         file = 'sample_photos/side_closed_eyes.jpg'
         trace(5, 'testing ' + file)
