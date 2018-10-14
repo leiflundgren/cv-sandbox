@@ -26,12 +26,22 @@ class phototests(unittest.TestCase):
     #    #m.show_faces()
     #    self.assertEqual(4, len(m.faces)) # Sporty spice leans head to side?
 
-    def test_load_frontal_glasses(self):
-        file = 'sample_photos/frontal.jpg'
+    #def test_load_frontal_glasses(self):
+    #    file = 'sample_photos/frontal.jpg'
+    #    trace(5, 'testing ' + file)
+    #    m = self.eye_checker.check_image(file)
+    #    m.show_faces()
+
+    def test_load_angle_glasses(self):
+        file = 'sample_photos/side_open_eyes.jpg'
         trace(5, 'testing ' + file)
         m = self.eye_checker.check_image(file)
         m.show_faces()
-
+    def test_load_angle_closed_eyes(self):
+        file = 'sample_photos/side_closed_eyes.jpg'
+        trace(5, 'testing ' + file)
+        m = self.eye_checker.check_image(file)
+        m.show_faces()
 if __name__ == '__main__':
     unittest.main()
 
