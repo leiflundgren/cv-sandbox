@@ -4,3 +4,5 @@
 
 *.suo
 /__pycache__/*.pyc
+.vs/slnx.sqlite
+.vs/cv-sandbox
