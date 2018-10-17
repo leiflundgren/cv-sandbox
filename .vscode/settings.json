@@ -1,3 +1,18 @@
 {
-    "python.pythonPath": "C:\\dev\\Python36\\python.exe"
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64",
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "test_*.py"
+    ],
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.unittestEnabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    // Controls the font family.
+    "editor.fontFamily": "'DejaVu Sans Mono', Consolas, 'Courier New', monospace",
+
 }

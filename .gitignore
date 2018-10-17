@@ -4,3 +4,7 @@
 
 *.suo
 /__pycache__/*.pyc
+.vs/slnx.sqlite
+.vs/cv-sandbox
+/.vs/config/applicationhost.config
+/.vs/VSWorkspaceState.json
