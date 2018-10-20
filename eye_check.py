@@ -1,6 +1,7 @@
 import numpy
 import cv2
 from common import trace
+import pprint
 
 casc_file_frontal = 'cascades/haarcascade_frontalface_default.xml'
 casc_file_frontal_impr = 'cascades/lbpcascade_frontalface_improved.xml'
@@ -28,7 +29,7 @@ class EyeChecker:
             'scaleFactor': 1.2, 
             'minNeighbors': 8, 
             'minSize': (200, 200), 
-            'flags': cv2.CASCADE_FIND_BIGGEST_OBJECT
+            #'flags': cv2.CASCADE_FIND_BIGGEST_OBJECT
         }
         pass
 
@@ -95,8 +96,15 @@ class EyeChecker:
             faces_per_casc = {}
             self.faces = []
             
+            minSize = int(self.gray.shape[1] / 4)
+
+            settings = {}
+            settings.update(self.parent.detect_settings)
+            settings['minSize'] = (minSize,minSize)
+            trace(5, 'Starting face-detection, settings ' + pprint.pformat(settings, indent=3, compact=True))
+
             for name, casc in self.parent.face_cascades:
-                faces = casc.detectMultiScale(self.gray, **self.parent.detect_settings)
+                faces = casc.detectMultiScale(self.gray, **settings)
                 if len(faces) == 0 :
                     trace(6, 'detecting {0}/{1} found NO faces'.format(self.name, name, len(faces)))
                 else:

@@ -5,24 +5,27 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{16cb9366-8747-4165-a4a3-27b757aaef72}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>test_photos.py</StartupFile>
+    <StartupFile>eyeblink.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <InterpreterId />
-    <InterpreterVersion />
+    <CommandLineArguments>
+    </CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <PropertyGroup>
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
-    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="common.py" />
+    <Compile Include="eyeblink.py" />
     <Compile Include="eye_check.py" />
+    <Compile Include="face_landmark_detection.py" />
+    <Compile Include="test_opencv_installed.py" />
     <Compile Include="test_photos.py" />
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +37,5 @@
   <ItemGroup>
     <Folder Include="sample_photos" />
   </ItemGroup>
-  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>
